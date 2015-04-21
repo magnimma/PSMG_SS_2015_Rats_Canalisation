@@ -4,7 +4,8 @@ using System.Collections;
 public class RatMovement : MonoBehaviour {
 
     public float rotationSpeed = 1f;
-    public float movementSpeed = 10f;
+	public static float generalMovementSpeed = 3f;
+    public float movementSpeed = generalMovementSpeed;
     public float jumpSpeed = 20f;
     public float RayCastLength = .1f;
     public bool isGrounded;
@@ -60,6 +61,19 @@ public class RatMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		float runSpeed = 5f;
+		float slowSpeed = 1f;
+		//Run
+		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+			movementSpeed = runSpeed;
+		} 
+		//Slow
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			movementSpeed = slowSpeed;
+		}
+		//Normalize
+		if (Input.GetKeyUp (KeyCode.LeftControl)||Input.GetKeyUp (KeyCode.LeftShift)) {
+			movementSpeed = generalMovementSpeed;
+		}
 	}
 }
